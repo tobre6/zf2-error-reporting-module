@@ -17,8 +17,9 @@ class Module
     public function onBootstrap(MvcEvent $event)
     {
         $eventManager = $event->getApplication()->getEventManager();
-        $eventManager->attach(ModuleEvent::EVENT_LOAD_MODULE_RESOLVE, function($e) {
+        $eventManager->attach(ModuleEvent::EVENT_LOAD_MODULES, function($e) {
             var_dump($e);
+            die('aaa');
         }, 100);
     }
 
