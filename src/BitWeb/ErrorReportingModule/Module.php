@@ -10,6 +10,7 @@ namespace BitWeb\ErrorReportingModule;
 
 
 use Zend\ModuleManager\ModuleEvent;
+use Zend\Mvc\MvcEvent;
 
 class Module
 {
