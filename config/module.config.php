@@ -1,18 +1,25 @@
 <?php
 return array(
-    'subject' => '[Errors][your-app-id-here]',
-    'emails' => array(
-        'you@domain.com'
+    'error_reporting' => array(
+        'subject' => '[Errors][your-app-id-here]',
+        'emails' => array(
+            'you@domain.com'
+        ),
+        'from_address' => 'you@domian.com',
+        'ignore404' => false,
+        'ignoreBot404' => false,
+        'botList' => array(
+            'AhrefsBot',
+            'bingbot',
+            'Ezooms',
+            'Googlebot',
+            'Mail.RU_Bot',
+            'YandexBot',
+        ),
     ),
-    'from_address' => 'you@domian.com',
-    'ignore404' => false,
-    'ignoreBot404' => false,
-    'botList' => array(
-        'AhrefsBot',
-        'bingbot',
-        'Ezooms',
-        'Googlebot',
-        'Mail.RU_Bot',
-        'YandexBot',
+    'service_manager' => array(
+        'factories' => array(
+            'BitWeb\ErrorReporting\Service\ErrorService' => 'BitWeb\ErrorReportingModule\Service\Factory\ErrorServiceFactory',
+        )
     )
 );

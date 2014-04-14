@@ -10,7 +10,9 @@
         }
     ],
     "require": {
-        "bitweb/error-reporting": "1.0.*"
+        "bitweb/error-reporting": "1.0.*",
+        "zendframework/zend-servicemanager":"2.3.*",
+        "zendframework/zend-modulemanager":"2.3.*"
     },
     "autoload": {
         "psr-0": {

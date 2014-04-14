@@ -9,10 +9,21 @@
 namespace BitWeb\ErrorReportingModule;
 
 
+use Zend\ModuleManager\ModuleEvent;
+
 class Module
 {
+    public function onBootstrap(MvcEvent $event)
+    {
+        $eventManager = $event->getApplication()->getEventManager();
+        $eventManager->attach(ModuleEvent::EVENT_LOAD_MODULE_RESOLVE, function($e) {
+            var_dump($e);
+        }, 100);
+    }
+
     public function getConfig()
     {
+        die();
         return include __DIR__ . '/../../../config/module.config.php';
     }
 
