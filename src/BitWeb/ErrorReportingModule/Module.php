@@ -9,33 +9,27 @@
 namespace BitWeb\ErrorReportingModule;
 
 
-use Zend\ModuleManager\ModuleEvent;
+use BitWeb\ErrorReporting\Service\ErrorService;
+use Zend\EventManager\EventInterface;
+use Zend\ModuleManager\Feature\BootstrapListenerInterface;
 use Zend\Mvc\MvcEvent;
 
-class Module
+class Module implements BootstrapListenerInterface
 {
-    public function onBootstrap(MvcEvent $event)
+
+    public function onBootstrap(EventInterface $event)
     {
-        $eventManager = $event->getApplication()->getEventManager();
-        $eventManager->attach(ModuleEvent::EVENT_LOAD_MODULES, function($e) {
-            var_dump($e);
-            die('aaa');
-        }, 100);
+        /* @var $errorService \BitWeb\ErrorReporting\Service\ErrorService */
+        $errorService = $event->getApplication()->getServiceManager()->get(ErrorService::class);
+        $errorService->startErrorHandling();
+
+        $event->getApplication()->getEventManager()->attach(MvcEvent::EVENT_FINISH, function (MvcEvent $e) use ($errorService) {
+            $errorService->endErrorHandling();
+        });
     }
 
     public function getConfig()
     {
         return include __DIR__ . '/../../../config/module.config.php';
-    }
-
-    public function getAutoloaderConfig()
-    {
-        return array(
-            'Zend\Loader\StandardAutoloader' => array(
-                'namespaces' => array(
-                    __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
-                ),
-            ),
-        );
     }
 }
