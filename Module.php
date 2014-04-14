@@ -1,2 +1,2 @@
 <?php
-require_once 'src/BitWeb/ErrorReportingModule/Module.php';
+require_once __DIR__ . '/src/BitWeb/ErrorReportingModule/Module.php';
